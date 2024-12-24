@@ -1,7 +1,17 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Request, HTTPException
 from schemas import SpecialtyChoices, Company
+from src.routes import UserRouter, AuthRouter
 
 app = FastAPI()
+
+@app.middleware('http')
+def middleware(request: Request, call_next):
+  print(request.get('headers'))
+  response = call_next(request)
+  return response
+
+app.include_router(UserRouter)
+app.include_router(AuthRouter)
 
 COMPANIES = [
   {'id':1 , 'name':'Julies', 'specialty':'Pastries'},

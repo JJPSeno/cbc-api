@@ -16,3 +16,10 @@ class Company(BaseModel):
   specialty: str
   branches: list[Branch] = []
 
+class User(BaseModel):
+  id: int
+  display_name: str
+  first_name: str
+  last_name: str
+  email: str
+  hashed_password: str
