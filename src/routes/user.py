@@ -2,6 +2,7 @@ from fastapi import APIRouter, Header
 from typing import Annotated
 import jwt
 from .auth import JWT_SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from .helper import fake_users_db
 
 router = APIRouter(prefix='/user')
 
@@ -9,5 +10,5 @@ router = APIRouter(prefix='/user')
 def me(authorization: Annotated[str, Header()]):
   print(authorization)
   details = jwt.decode(authorization, JWT_SECRET_KEY, algorithms=[ALGORITHM])
-  print(details)
-  return {'message':'Request Recieved', "user": details}
+  session_email = details["email"]
+  return {'message':'Request Recieved', "user": fake_users_db[session_email]}

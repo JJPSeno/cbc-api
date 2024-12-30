@@ -8,6 +8,12 @@ import bcrypt
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt.exceptions import InvalidTokenError
 from pydantic import BaseModel
+from .helper import fake_users_db
+
+os.environ.pop("PW_SECRET_KEY", None)
+os.environ.pop("JWT_SECRET_KEY", None)
+os.environ.pop("ALGORITHM", None)
+os.environ.pop("ACCESS_TOKEN_EXPIRE_MINUTES", None)
 
 load_dotenv()
 
@@ -30,16 +36,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
 
 if not ACCESS_TOKEN_EXPIRE_MINUTES:
   raise ValueError("ACCESS_TOKEN_EXPIRE_MINUTES environment variable is not set!")
-
-fake_users_db = {
-  "johndoe": {
-    "username": "johndoe",
-    "full_name": "John Doe",
-    "email": "johndoe@example.com",
-    "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",
-    "disabled": False,
-  }
-}
 
 # pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -71,7 +67,7 @@ def register(registerPayload: RegisterPayload):
     print(registerPayload)
     hashed_pwd = hash_password(registerPayload.password)
     print(hashed_pwd)
-    fake_users_db[registerPayload.email] = {"email":registerPayload.email, "hashed_password": hashed_pwd}
+    fake_users_db[registerPayload.email] = {"email":registerPayload.email, "hashed_password": hashed_pwd, "full_name": registerPayload.full_name}
     return {'message':'Request Recieved'}
   except HTTPException as e:
     raise e
