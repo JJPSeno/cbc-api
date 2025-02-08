@@ -1,4 +1,4 @@
-def individual_serializer(user) -> dict:
+def serialize_user(user) -> dict:
   return {
     "id": str(user["_id"]),
     "email": user["email"],
@@ -8,5 +8,5 @@ def individual_serializer(user) -> dict:
     "last_name": user.get("last_name")
   }
 
-def list_serial(users) -> list:
-  return[individual_serializer(user) for user in users]
+def list_users(users) -> list:
+  return[serialize_user(user) for user in users]

@@ -9,10 +9,10 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt.exceptions import InvalidTokenError
 from pydantic import BaseModel
 from ..schemas.schemas import LoginPayload
-from ..models.Users import RegisterPayload, Users
 from .helper import fake_users_db
 from config.database import users_collection
-from ..mdb_schemas.schemas import list_serial
+from ..mdb_schemas.Users import list_users
+from ..models.Users import RegisterPayload, Users
 from bson import ObjectId
 
 #region load env

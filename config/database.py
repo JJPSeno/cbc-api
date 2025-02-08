@@ -21,3 +21,4 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 db = client.cbcdb
 
 users_collection = db["cbcdb_users"]
+businesses_collection = db["cbcdb_businesses"]
