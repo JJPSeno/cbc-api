@@ -15,3 +15,9 @@ class BusinessesPayload(BaseModel):
   address: str
   phone_number: str
   email: Optional[EmailStr] = None
+
+class UpdateBusinessesPayload(BaseModel):
+  company_name: Optional[str] = None
+  address: Optional[str] = None
+  phone_number: Optional[str] = None
+  email: Optional[EmailStr] = None
