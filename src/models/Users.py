@@ -14,3 +14,9 @@ class RegisterPayload(BaseModel):
   display_name: str
   first_name: Optional[str] = None
   last_name: Optional[str] = None
+
+class UpdateUsersPayload(BaseModel):
+  email: Optional[EmailStr] = None
+  display_name: Optional[str] = None
+  first_name: Optional[str] = None
+  last_name: Optional[str] = None
