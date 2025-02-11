@@ -40,3 +40,18 @@ def update_business(user_id: str, user_payload: UpdateUsersPayload):
 
   except Exception as e:
     raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/users/{user_id}/businesses")
+def get_user_businesses(user_id: str):
+  pass
+
+
+@router.post("/users/{user_id}/businesses/{business_id}")
+def add_business_to_user(user_id: str, business_id: str):
+  pass
+
+
+@router.delete("/users/{user_id}/businesses/{business_id}")
+def remove_business_from_user(user_id: str, business_id: str):
+  pass
